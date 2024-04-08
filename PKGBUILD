@@ -2,8 +2,8 @@
 
 _base=govarnam
 pkgname=${_base}-bin
-pkgver=1.9.0
-pkgrel=2
+pkgver=1.9.1
+pkgrel=1
 pkgdesc="Transliteration and reverse transliteration for Indian languages - Go port of libvarnam"
 arch=('x86_64')
 url="https://www.varnamproject.com"
@@ -12,7 +12,7 @@ makedepends=('unzip')
 depends=('go')
 provides=('govarnam')
 source=("https://github.com/varnamproject/${_base}/releases/download/v${pkgver}/${_base}-${pkgver}-${arch}.zip")
-sha256sums=('d6c0017f62bc1d1816e799984529b62a3bc1d6c37e4dbd6f9b0b13b57e7446fc')
+sha256sums=('ce7cd06e03d2435313624ad31c2130f7b8b6779c626281ef11318e4045289aaa')
 optdepends=('govarnam-ibus: Ibus engine support'
             'govarnam-schemes: Language schemes support')
 
@@ -28,6 +28,7 @@ package() {
 
 	install -Dm 644 libgovarnam.so "${pkgdir}/usr/lib/libgovarnam.so.${pkgver}"
 	ln -s /usr/lib/libgovarnam.so.${pkgver} "${pkgdir}/usr/lib/libgovarnam.so"
+	ln -s /usr/lib/libgovarnam.so.${pkgver} "${pkgdir}/usr/lib/libgovarnam.so.1"
 
 	install -Dm 644 govarnam.pc "${pkgdir}/usr/lib/pkgconfig/govarnam.pc"
 
