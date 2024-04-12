@@ -5,7 +5,7 @@
 
 pkgname=git-review
 pkgver=2.4.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Tool to submit code to Gerrit'
 arch=('any')
 url='https://opendev.org/opendev/git-review'
@@ -13,9 +13,9 @@ license=('APACHE')
 depends=('git' 'python-requests')
 makedepends=('python-pbr' 'python-build' 'python-installer' 'python-setuptools' 'python-wheel')
 #checkdepends=('java-runtime=11' 'libcups' 'openssh' 'procps-ng' 'python-stestr' 'python-mock')
-source=("$pkgname-$pkgver.tar.gz::https://opendev.org/opendev/git-review/archive/$pkgver.tar.gz"
+source=("git+https://opendev.org/opendev/git-review.git#commit=b65c3c201c0a495f19cc4757f969119f8a65385a"  # 2.4.0 tag
         'https://gerrit-releases.storage.googleapis.com/gerrit-3.4.4.war')
-sha512sums=('acbfde06a03776494f1506355d837111305c45cd9424aed4b852ebb5c496a83184eb7d515425b48317d9e0858021f8bd78b6c2184fc1d4655d00ca2ade244532'
+sha512sums=('SKIP'
             'bb7d54585d16a3a4c2660d1e4cdfe193164f4f18e24a2d5df147936023a237332b1c1e1e21198c2f4216935e37fd3dc1494a0c1aa41c6dcf6b966f19c9f976ce')
 
 prepare() {
