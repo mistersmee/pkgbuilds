@@ -3,7 +3,7 @@
 _base=metaphone
 pkgname=python-${_base}
 pkgver=0.6.0
-pkgrel=2
+pkgrel=3
 pkgdesc="A Python implementation of the Metaphone and Double Metaphone algorithms"
 arch=('any')
 url="https://github.com/oubiwann/${_base}"
