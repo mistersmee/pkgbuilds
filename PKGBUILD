@@ -3,7 +3,7 @@
 _base=dataprep
 pkgname=python-${_base}
 pkgver=0.4.5
-pkgrel=1
+pkgrel=2
 pkgdesc="A low code data preparation library in python."
 arch=('any')
 url="https://github.com/sfu-db/${_base}"
