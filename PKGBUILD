@@ -3,7 +3,7 @@
 _pkgname=pdf2docx
 pkgname=python-${_pkgname}-git
 pkgver=0.5.6.r7.g288cae8
-pkgrel=2
+pkgrel=3
 pkgdesc="A Python library for converting pdf to docx"
 arch=('any')
 url="https://github.com/dothinking/${_pkgname}"
