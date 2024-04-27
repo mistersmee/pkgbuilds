@@ -4,7 +4,7 @@
 
 pkgname=python-vlc
 pkgver=3.0.20123
-pkgrel=1
+pkgrel=2
 pkgdesc="VLC bindings for python"
 url="https://wiki.videolan.org/PythonBinding"
 license=("GPL2")
