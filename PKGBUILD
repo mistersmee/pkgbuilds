@@ -5,7 +5,7 @@
 _base=chatterbot
 pkgname=python-${_base}
 pkgver=1.0.8
-pkgrel=3
+pkgrel=4
 pkgdesc="A machine learning, conversational dialog engine for creating chatbots."
 arch=('any')
 url="https://github.com/gunthercox/${_base}"
