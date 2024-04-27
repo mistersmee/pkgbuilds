@@ -1,7 +1,7 @@
 pkgbase = python-srsly
 	pkgdesc = Modern high-performance serialization utilities for Python
 	pkgver = 2.4.8
-	pkgrel = 3
+	pkgrel = 4
 	url = https://github.com/explosion/srsly
 	arch = x86_64
 	arch = aarch64
