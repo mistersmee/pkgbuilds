@@ -3,7 +3,7 @@
 _base=pdf2docx
 pkgname=python-${_base}
 pkgver=0.5.8
-pkgrel=1
+pkgrel=2
 pkgdesc="A Python library for converting pdf to docx"
 arch=('any')
 url="https://github.com/artifexsoftware/${_base}"
