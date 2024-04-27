@@ -3,7 +3,7 @@
 _base=dataprep
 pkgname=python-${_base}-git
 pkgver=0.4.4.r19.gae07c1e
-pkgrel=1
+pkgrel=2
 pkgdesc="A low code data preparation library in python -- git version"
 arch=('any')
 url="https://github.com/sfu-db/${_base}"
