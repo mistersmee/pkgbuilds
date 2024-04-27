@@ -3,7 +3,7 @@
 _base=inputs
 pkgname=python-inputs-git
 pkgver=0.5.r2.ga46681d
-pkgrel=2
+pkgrel=3
 pkgdesc="Cross-platform Python support for keyboards, mice and gamepads - git version"
 arch=('any')
 url="https://github.com/zeth/inputs"
