@@ -3,7 +3,7 @@
 _base=python-crfsuite
 pkgname=${_base}-git
 epoch=1
-pkgver=0.9.10.r0.g7cd8735
+pkgver=0.9.10.r0.gf7c0165
 pkgrel=2
 pkgdesc="A python binding for crfsuite"
 arch=('any')
