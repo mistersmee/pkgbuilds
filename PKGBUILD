@@ -20,7 +20,7 @@ checkdepends=('cargo' 'python-pytest' 'python-virtualenv')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/$_commit.tar.gz"
         "$pkgname-0.1.5-distutils.patch")
 sha256sums=('42b89da523e0c530b3b9744dcd660adce3ff4a5dd4b11121a59c53ce992a76cc'
-            '3de5520219bc857aa20a38af0eaf2562eb646b1445889ed6b2379f89d46ad1a6')
+            'e3ec3c530bc606def7806a2a604ac943e7c191e2f3b5c35fa8f465bf63b1e52b')
 
 prepare() {
 	# improve distutils build command: https://github.com/getsentry/milksnake/pull/30

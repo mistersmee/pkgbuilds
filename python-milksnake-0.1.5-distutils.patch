@@ -32,22 +32,22 @@ index 88cc549..bec6e80 100644
  import shutil
 -import tempfile
  import subprocess
- 
+
  from distutils import log
 -from distutils.core import Extension
 -from distutils.ccompiler import new_compiler
  from distutils.command.build_py import build_py
  from distutils.command.build_ext import build_ext
- 
+
  from cffi import FFI
  from cffi import recompiler as cffi_recompiler
 -from cffi import setuptools_ext as cffi_ste
- 
+
  try:
      from wheel.bdist_wheel import bdist_wheel
 @@ -21,16 +16,6 @@
      bdist_wheel = None
- 
+
  here = os.path.abspath(os.path.dirname(__file__))
 -EMPTY_C = u'''
 -void init%(mod)s(void) {}
@@ -59,12 +59,12 @@ index 88cc549..bec6e80 100644
 -from milksnake.ffi import make_ffi
 -ffi = make_ffi(**%(kwargs)r)
 -'''
- 
+
  MODULE_PY = u'''# auto-generated file
  __all__ = ['lib', 'ffi']
 @@ -88,24 +73,6 @@ def run(self):
                      func(base_path=base_path, inplace=False)
- 
+
          class MilksnakeBuildExt(base_build_ext):
 -            def get_ext_fullpath(self, ext_name):
 -                milksnake_dummy_ext = None
@@ -88,15 +88,15 @@ index 88cc549..bec6e80 100644
                  base_build_ext.run(self)
                  if self.inplace:
 @@ -216,7 +183,6 @@ def __init__(self, spec, module_path, dylib=None, header_filename=None,
- 
+
          genbase = '%s._%s' % (parts[0], parts[1].lstrip('_'))
          self.cffi_module_path = '%s__ffi' % genbase
 -        self.fake_module_path = '%s__lib' % genbase
- 
+
          from distutils.sysconfig import get_config_var
          self.lib_filename = '%s__lib%s' % (
 @@ -237,27 +203,9 @@ def get_header_source(self):
- 
+
      def prepare_build(self):
          dist = self.spec.dist
 -
@@ -107,7 +107,7 @@ index 88cc549..bec6e80 100644
 -        # other systems into assuming our library has binary extensions.
          if dist.ext_modules is None:
              dist.ext_modules = []
- 
+
 -        build = dist.get_command_obj('build')
 -        build.ensure_finalized()
 -        empty_c_path = os.path.join(build.build_temp, 'empty.c')
@@ -125,8 +125,8 @@ index 88cc549..bec6e80 100644
              return make_ffi(self.module_path,
 @@ -319,8 +267,33 @@ def get_tag(self):
      dist.cmdclass['bdist_wheel'] = MilksnakeBdistWheel
- 
- 
+
+
 +def patch_distutils_build(dist):
 +    """Trick wheel and other systems into assuming
 +    our library has binary extensions
@@ -155,7 +155,7 @@ index 88cc549..bec6e80 100644
      """Registers task callbacks."""
 +    patch_distutils_build(dist)
      patch_universal_wheel(dist)
- 
+
      spec = Spec(dist)
 diff --git a/setup.py b/setup.py
 index 39b3d79..8a73b5b 100644
@@ -183,7 +183,7 @@ index 57e4411..005c53b 100644
  import atexit
 @@ -28,7 +29,10 @@ def __init__(self, path):
          self.path = path
- 
+
      def spawn(self, executable, args=None, **kwargs):
 -        return subprocess.Popen([os.path.join(self.path, 'bin', executable)] +
 +        bin_dir = 'bin'
@@ -191,7 +191,7 @@ index 57e4411..005c53b 100644
 +            bin_dir = 'Scripts'
 +        return subprocess.Popen([os.path.join(self.path, bin_dir, executable)] +
                                  list(args or ()), **kwargs)
- 
+
      def run(self, executable, args=None):
 @@ -62,7 +66,7 @@ def _remove():
      subprocess.Popen(['virtualenv', path]).wait()
@@ -241,12 +241,12 @@ index 0bc2936..97aa666 100644
 +++ b/README.md
 @@ -107,7 +107,7 @@ name = "example"
  crate-type = ["cdylib"]
- 
+
  [build-dependencies]
 -cbindgen = "0.4"
 +cbindgen = "0.19"
  ```
- 
+
  And finally the build.rs file:
 diff --git a/example/rust/Cargo.toml b/example/rust/Cargo.toml
 index 0504526..5cda692 100644
@@ -254,7 +254,7 @@ index 0504526..5cda692 100644
 +++ b/example/rust/Cargo.toml
 @@ -9,4 +9,4 @@ name = "example"
  crate-type = ["cdylib"]
- 
+
  [build-dependencies]
 -cbindgen = "0.4"
 +cbindgen = "0.19"
@@ -265,19 +265,28 @@ Date: Tue, 22 Jun 2021 15:28:20 +0800
 Subject: [PATCH 3/5] Replace \r\n with \n to fix Windows error
 
 ---
- milksnake/ffi.py | 1 +
- 1 file changed, 1 insertion(+)
+ milksnake/ffi.py | 2 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/milksnake/ffi.py b/milksnake/ffi.py
 index de09ef6..0cb6c02 100644
 --- a/milksnake/ffi.py
 +++ b/milksnake/ffi.py
-@@ -14,6 +14,7 @@ def make_ffi(module_path, header, strip_directives=False):
+@@ -5,7 +5,7 @@
+ from ._compat import PY2
+
+
+-_directive_re = re.compile(r'^\s*#.*?$(?m)')
++_directive_re = re.compile(r'(?m)^\s*#.*?$')
+
+
+ def make_ffi(module_path, header, strip_directives=False):
+@@ -14,6 +14,7 @@
          header = header.decode('utf-8')
      if strip_directives:
          header = _directive_re.sub('', header)
 +    header = header.replace('\r\n', '\n')
- 
+
      ffi = cffi.FFI()
      ffi.cdef(header)
 
@@ -357,7 +366,7 @@ index bec6e80..ce35c3a 100644
 +++ b/milksnake/setuptools_ext.py
 @@ -185,10 +185,18 @@ def __init__(self, spec, module_path, dylib=None, header_filename=None,
          self.cffi_module_path = '%s__ffi' % genbase
- 
+
          from distutils.sysconfig import get_config_var
 -        self.lib_filename = '%s__lib%s' % (
 -            genbase.split('.')[-1],
@@ -375,6 +384,6 @@ index bec6e80..ce35c3a 100644
 +            get_config_var('SO') or plat_ext
 +
 +        self.lib_filename = '%s__lib%s' % (genbase.split('.')[-1], ext)
- 
+
      def get_header_source(self):
          if self.header_source is not None:
