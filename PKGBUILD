@@ -5,14 +5,14 @@
 pkgname=python-wasabi
 _pkg="${pkgname#python-}"
 pkgver=1.1.2
-pkgrel=2
+pkgrel=3
 pkgdesc='Lightweight console printing and formatting toolkit'
 arch=('any')
 url='https://github.com/explosion/wasabi'
 license=('MIT')
 depends=('python')
 makedepends=('python-build' 'python-installer' 'python-setuptools' 'python-wheel')
-checkdepends=('python-pytest')
+checkdepends=('python-pytest' 'jupyter-nbconvert')
 source=("$pkgname-$pkgver.tar.gz::https://files.pythonhosted.org/packages/source/w/$_pkg/$_pkg-$pkgver.tar.gz")
 sha256sums=('1aaef3aceaa32edb9c91330d29d3936c0c39fdb965743549c173cb54b16c30b5')
 
