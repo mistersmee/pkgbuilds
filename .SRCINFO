@@ -1,7 +1,7 @@
 pkgbase = python-crfsuite-git
 	pkgdesc = A python binding for crfsuite
 	pkgver = 0.9.10.r0.gf7c0165
-	pkgrel = 2
+	pkgrel = 3
 	epoch = 1
 	url = https://github.com/scrapinghub/python-crfsuite
 	arch = any
@@ -13,6 +13,8 @@ pkgbase = python-crfsuite-git
 	makedepends = cython
 	makedepends = git
 	depends = python
+	provides = python-crfsuite
+	conflicts = python-crfsuite
 	source = git+https://github.com/scrapinghub/python-crfsuite.git
 	source = git+https://github.com/chokkan/crfsuite.git
 	source = git+https://github.com/chokkan/liblbfgs.git

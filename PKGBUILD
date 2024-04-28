@@ -4,7 +4,7 @@ _base=python-crfsuite
 pkgname=${_base}-git
 epoch=1
 pkgver=0.9.10.r0.gf7c0165
-pkgrel=2
+pkgrel=3
 pkgdesc="A python binding for crfsuite"
 arch=('any')
 url="https://github.com/scrapinghub/${_base}"
@@ -17,6 +17,8 @@ source=("git+https://github.com/scrapinghub/python-crfsuite.git"
 sha512sums=("SKIP"
             "SKIP"
             "SKIP")
+provides=('python-crfsuite')
+conflicts=('python-crfsuite')
 
 pkgver() {
   cd "${_base}"
