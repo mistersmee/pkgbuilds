@@ -3,13 +3,14 @@
 _pkgname=python-varname
 pkgname=${_pkgname}-git
 pkgver=0.13.0.r0.gea1ec82
-pkgrel=2
+pkgrel=3
 pkgdesc="A Python library to retrieve variable names from functions or classes -- git version"
 arch=('any')
 url="https://github.com/pwwang/${_pkgname}"
 license=('MIT')
-depends=('python')
-makedepends=('git' 'python-setuptools' 'python-build' 'python-installer' 'python-wheel' 'python-poetry' 'python-virtualenv' 'python-cachecontrol' 'python-poetry-plugin-export' 'python-jsonschema')
+depends=('python' 'python-executing')
+optdepends=('python-asttokens' 'python-pure-eval')
+makedepends=('git' 'python-setuptools' 'python-build' 'python-installer' 'python-wheel' 'python-poetry')
 source=("git+${url}.git")
 sha512sums=('SKIP')
 
@@ -24,7 +25,8 @@ prepare() {
 
 build() {
   cd "${_pkgname}"
-  python -m build --wheel --no-isolation
+	## skip dependency check because of pinned deps
+  python -m build --wheel --no-isolation --skip-dependency-check
 }
 
 package() {
