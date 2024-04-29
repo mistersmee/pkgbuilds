@@ -3,13 +3,14 @@
 _name=varname
 pkgname=python-varname
 pkgver=0.13.0
-pkgrel=3
+pkgrel=4
 pkgdesc="A Python library to retrieve variable names from functions or classes"
 arch=('any')
 url="https://github.com/pwwang/${pkgname}"
 license=('MIT')
-depends=('python')
-makedepends=('python-setuptools' 'python-build' 'python-installer' 'python-wheel' 'python-poetry' 'python-virtualenv' 'python-cachecontrol' 'python-poetry-plugin-export' 'python-jsonschema')
+depends=('python' 'python-executing')
+optdepends=('python-asttokens' 'python-pure-eval')
+makedepends=('python-setuptools' 'python-build' 'python-installer' 'python-wheel' 'python-poetry')
 source=(${url}/archive/refs/tags/${pkgver}.tar.gz)
 sha512sums=('ab0703330f7c98f92032b0a98c770e4ef6c737c5788cc18674c0be8e4930b9e2441385f3478fe23f6db208fb58019d4a7efb2d740fb3e527b6ce5146a976d3d0')
 
