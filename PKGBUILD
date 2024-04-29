@@ -3,25 +3,24 @@
 _name=varname
 pkgname=python-varname
 pkgver=0.13.0
-pkgrel=2
+pkgrel=3
 pkgdesc="A Python library to retrieve variable names from functions or classes"
 arch=('any')
 url="https://github.com/pwwang/${pkgname}"
 license=('MIT')
 depends=('python')
 makedepends=('python-setuptools' 'python-build' 'python-installer' 'python-wheel' 'python-poetry' 'python-virtualenv' 'python-cachecontrol' 'python-poetry-plugin-export' 'python-jsonschema')
-source=(https://files.pythonhosted.org/packages/py3/${_name::1}/$_name/${_name//-/_}-$pkgver-py3-none-any.whl
-        https://raw.githubusercontent.com/pwwang/python-varname/master/LICENSE)
-sha512sums=('3c6a1e985d0da62ab79bf594463dd2ee4572ad4fc537e440f64ae9faff6be4815fe7a940865941e5cde14ac8fa32bedd98176eb6307c2ea7b220b5d119c0c9c5'
-            '2828675fdc0587a146cdefb17d5c6fb9f3bd657a57c920bf0bc49a6c4dcc1e7a462b2c918d3b724510e85966eb02f66b2a96bcb4f368613fec18992c429f2c84')
+source=(${url}/archive/refs/tags/${pkgver}.tar.gz)
+sha512sums=('ab0703330f7c98f92032b0a98c770e4ef6c737c5788cc18674c0be8e4930b9e2441385f3478fe23f6db208fb58019d4a7efb2d740fb3e527b6ce5146a976d3d0')
 
-#build() {
-#  cd "${pkgname}-${pkgver}"
-#  python -m build --wheel --no-isolation
-#}
+build() {
+  cd "${pkgname}-${pkgver}"
+	## skip dependency check because of pinned deps
+  python -m build --wheel --no-isolation --skip-dependency-check
+}
 
 package() {
-#  cd "${pkgname}-${pkgver}"
-  python -m installer --destdir="$pkgdir" ${_name}-${pkgver}-py3-none-any.whl
+  cd "${pkgname}-${pkgver}"
+  python -m installer --destdir="$pkgdir" dist/*.whl
   install -Dm 644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }
