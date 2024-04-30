@@ -30,13 +30,14 @@ pkgver() {
   git describe --long --tags --abbrev=7 | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
-#prepare() {
-#  cd "$_origpkgname"
+prepare() {
+  cd "$_origpkgname"
 #  sed -i 's/ctypedef unsigned long long uint64_t/from libc.stdint cimport uint64_t/' srsly/msgpack/_unpacker.pyx
 #  sed -i 's/,<0.30.0//' setup.cfg
 #  sed -i 's/,<0.30.0//' pyproject.toml
 #  sed -i 's/,<0.30.0//' requirements.txt
-#}
+  git -C "${srcdir}/${_origpkgname}" clean -dfx
+}
 
 build() {
   cd "${_origpkgname}"
