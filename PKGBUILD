@@ -18,6 +18,11 @@ pkgver() {
   git describe --long --tags --abbrev=7 | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
+prepare() {
+  cd "${_pkgname}"
+  git -C "${srcdir}/${_pkgname}" clean -dfx
+}
+
 build() {
   cd "${_pkgname}"
   python -m build --wheel --no-isolation
