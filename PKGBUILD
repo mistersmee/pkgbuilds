@@ -23,7 +23,9 @@ pkgver() {
 prepare() {
   cd "${_pkgname}"
   cython -a gbinder.pyx
+  git -C "${srcdir}/${_pkgname}" clean -dfx
 }
+
 build() {
   cd ${_pkgname}
   python -m build --wheel --no-isolation
