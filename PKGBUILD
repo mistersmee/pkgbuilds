@@ -15,6 +15,7 @@ b2sums=('3126144fb80701028266a80ad9a27eda0939a257527186643bd6bcd582fd1dc47f35ab4
 
 build() {
 	cd "${_pkgname}-${pkgver}"
+	## skip dependency check because of pinned deps
 	python -m build --wheel --no-isolation --skip-dependency-check
 }
 
