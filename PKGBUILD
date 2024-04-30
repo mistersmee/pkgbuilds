@@ -24,6 +24,7 @@ pkgver() {
 prepare() {
     cd "${_base}"
     patch -p1 -i "$srcdir"/3203c9e25f1e14c4316d85d59c536b4e407f569f.patch
+    git -C "${srcdir}/${_base}" clean -dfx
 }
 
 build() {
