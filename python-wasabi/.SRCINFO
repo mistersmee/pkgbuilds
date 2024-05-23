@@ -1,0 +1,18 @@
+pkgbase = python-wasabi
+	pkgdesc = Lightweight console printing and formatting toolkit
+	pkgver = 1.1.2
+	pkgrel = 3
+	url = https://github.com/explosion/wasabi
+	arch = any
+	license = MIT
+	checkdepends = python-pytest
+	checkdepends = jupyter-nbconvert
+	makedepends = python-build
+	makedepends = python-installer
+	makedepends = python-setuptools
+	makedepends = python-wheel
+	depends = python
+	source = python-wasabi-1.1.2.tar.gz::https://files.pythonhosted.org/packages/source/w/wasabi/wasabi-1.1.2.tar.gz
+	sha256sums = 1aaef3aceaa32edb9c91330d29d3936c0c39fdb965743549c173cb54b16c30b5
+
+pkgname = python-wasabi
