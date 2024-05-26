@@ -5,7 +5,7 @@
 # - veger
 pkgname=capt-src
 pkgver=2.71
-pkgrel=4
+pkgrel=5
 pkgdesc="Canon CAPT Printer Driver for Linux. Compiled from source code."
 arch=('i686' 'x86_64')
 url='http://support-asia.canon-asia.com/'
@@ -25,6 +25,7 @@ _endlibdir=/usr/lib
 
 prepare() {
     _capt_dir=${srcdir}/cndrvcups-capt-${pkgver}
+    _common_dir=${srcdir}/cndrvcups-common-${_pkgcommonver}
 
     cd ${srcdir}
     tar xvzf ${srcdir}/${_tardir}/Src/cndrvcups-common-${_pkgcommonver}-1.tar.gz
@@ -34,6 +35,14 @@ prepare() {
     sed -i 's@#include <cups/cups.h>@#include <cups/cups.h>\n#include <cups/ppd.h>@' "${_capt_dir}/statusui/src/ppapdata.c"
     # Enables captstatusui - Thanks to kaztai
     sed -i 's@#include <cups/cups.h>@#include <cups/cups.h>\n#include <cups/ppd.h>@' "${_capt_dir}/statusui/src/uimain.c"
+#
+    # Enables compilation (A smattering of fixes)
+    sed -i 's@#include <cups/cups.h>@#include <cups/cups.h>\n#include <cups/ppd.h>@' "${_common_dir}/cngplp/src/printerinfo.c"
+    sed -i 's/int StartProcess2(mode)/int StartProcess2(int mode)/' "${_capt_dir}/statusui/src/main.c"
+    sed -i 's/int StartProcess(mode)/int StartProcess(int mode)/' "${_capt_dir}/statusui/src/main.c"
+    sed -i 's@#include <asm/errno.h>@#include <asm/errno.h>\n#include "../cnsktmodule/cnsktmodule.h"@' "${_capt_dir}/statusui/src/data_process.c"
+    sed -i 's@#include <stdlib.h>@#include <stdlib.h>\n#include <cups/ppd.h>@' "${_capt_dir}/cngplp/cngplpmod/cngplpmod.c"
+
 }
 
 _build_cndrvcups_common() {
@@ -130,7 +139,7 @@ _build_cndrvcups_capt() {
 
     msg "Compiling cndrvcups-capt package"
     cd ${_capt_dir}
-    make
+    make CFLAGS=-D_CNSKT_LCAPT
 }
 
 _package_cndrvcups_capt() {
