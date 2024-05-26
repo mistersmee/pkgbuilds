@@ -3,12 +3,12 @@
 pkgname=gnome-pass-search-provider-git
 _pkgname=gnome-pass-search-provider
 pkgver=r99.e0418d6
-pkgrel=2
+pkgrel=3
 pkgdesc="Gnome Search provider for pass (zx2c4/passwordstore.org), gopass and compatibles and rbw (Bitwarden/Vaultwarden) that sends passwords to clipboard (or GPaste)"
 arch=('any')
 url="https://github.com/jle64/gnome-pass-search-provider"
 license=('GPL')
-depends=('python-gobject' 'python-dbus' 'python-fuzzywuzzy')
+depends=('python-gobject' 'python-dbus' 'python-thefuzz')
 optdepends=('gpaste' 'pass' 'rbw' 'gopass')
 makedepends=('git')
 provides=($_pkgname)
